@@ -66,7 +66,7 @@ window.model = {
 					this.changeClass(allChild[i].id,"showDiv")	
 				}
 		}
-		if (selected_loop === "while" && inputValue !== "" && !isNaN(window.inp))
+		if (selected_loop === "while" && inputValue !== "" && !isNaN(this.inp))
 		{
 		 	var node = document.getElementById("whileLoopContent")
 			var allChild = node.childNodes
@@ -80,7 +80,7 @@ window.model = {
 					this.changeClass(allChild[i].id,"showDiv")	
 				}
 		}
-		if (selected_loop === "do-while" && inputValue !== "" && !isNaN(window.inp))
+		if (selected_loop === "do-while" && inputValue !== "" && !isNaN(this.inp))
 		{
 		 	var node = document.getElementById("dowhileLoopContent")
 			var allChild = node.childNodes
