@@ -1,343 +1,365 @@
-
 window.model = {
+	inp: 0,
+    nestedInp: 0,
     fact: 1,
-    input: 0,
-    nextNum: 1,
     init: function() {
-    	this.result	= 1
-
-    }
+		this.inp = 0
+		this.fact = 1
+	},
     computeNextFact: function() {
-
-    	result = result * nextNum
-    	nextNum--
+        this.fact =  this.fact * this.inp
     }
 }
 
 window.view = {
-	onload: function() {
-		this.activateEvents();
+	i: 1,
+	j: 1,
+	m: 1,
+	k: 0,
+	n: 0,
+	disp: 0,
+	stampSimple: 0,
+	stampNested: 0,
+	lastRedDiv: new Object(),
+	nextRedDiv: new Object(),
+	addClickEvent: function(id, method) {
+		var element = document.getElementById(id)
+		element.addEventListener('click', method, false)
 	},
-
+	addEventOnInputBox: function(id, method) {
+		var element = document.getElementById(id)
+		element.addEventListener('change', method, false)
+	},
+	replaceDiv: function(x, y) {
+ 		document.getElementById(x).style.display = 'none'
+ 		document.getElementById(y).style.display = 'block' 
+ 	},
+	getInput: function() {
+		var inputValue = document.getElementById('simpleLoopInput').value
+		model.inp = Number(inputValue)
+		this.clearExecutionSection()
+	},
+	getNestedInput: function() {
+		var inputValue = document.getElementById('nestedLoopInput').value
+		model.nestedInp = Number(inputValue)
+		this.clearExecutionSection()
+	},
 	activateEvents: function() {
-
+		this.addClickEvent('btnNext', function() { view.automatedExecutionForSimpleLoop() })
+		this.addClickEvent('optionFor', function() { view.clearExecutionSection() })
+		this.addClickEvent('optionWhile', function() { view.clearExecutionSection() })
+		this.addClickEvent('optionDoWhile', function() { view.clearExecutionSection() })
+		this.addClickEvent('btnStart', function() { view.startBtn() })
+		this.addClickEvent('nestedStartBtn', function() { view.startBtnNested() })
+		this.addClickEvent('nestedNextBtn', function() { view.automatedExecutionForNestedLoop() })
+		this.addClickEvent('btnNestedLoop', function() { view.switchMultipleDivForNestedLoop() })
+		this.addClickEvent('btnSimpleLoop', function() { view.switchMultipleDivForSimpleLoop() })
+		this.addEventOnInputBox('simpleLoopInput', function() { view.getInput() })
+		this.addEventOnInputBox('nestedLoopInput', function() { view.getNestedInput() })
 	},
-
-	changeClass: function(id, className)
-	{
+	switchMultipleDivForNestedLoop: function() {
+		this.replaceDiv('inputDivisionSimpleLoop','nested')
+		this.changeClass('nestedLocalI', 'nestedlocalVariableI')
+		this.changeClass('nestedLocalJ', 'nestedlocalVariableJ')
+		this.changeClass('nestedLocalK', 'nestedlocalVariableK')
+		this.changeClass('simpleLocalI', 'hide')
+		this.changeClass('simpleLocalFact', 'hide')
+	},
+	switchMultipleDivForSimpleLoop: function() {
+		this.replaceDiv('nested','inputDivisionSimpleLoop')
+		this.changeClass('nestedLocalI', 'hide')
+		this.changeClass('nestedLocalJ', 'hide')
+		this.changeClass('nestedLocalK', 'hide')
+		this.changeClass('simpleLocalI', 'localVariableI')
+		this.changeClass('simpleLocalFact', 'localVariableFact')
+	},
+	changeClass: function(id, className) {
 		document.getElementById(id).className = className
-	}
-}
-
-
-window.onload = function() { view.onload() }
-
-
-function mySwitchFunction(x, y)
- {
- 	document.getElementById(x).style.display="none";
- 	document.getElementById(y).style.display="block"; 
- }
-
-
-
-function disableButton(buttonId)
-{
-	document.getElementById(buttonId).disabled = true;
-}
-
-function enableButton(buttonId)
-{
-	document.getElementById(buttonId).disabled = false;
-}
-
-function getLastHighlightedDiv()
-{
-	var findClass = document.getElementsByClassName('showDivInRed')
-	return findClass[0]
-}
-
-function getNextDivToHighlight(lastHighlightedDiv)
-{
-	var next = lastHighlightedDiv.nextSibling
-	next = next.nextSibling
-	return next
-}
-
-function jumpToExitLoop(lastHighlightedDiv)
-{
-	var next = lastHighlightedDiv.nextSibling
-	for( i = 1 ; i <= 39 ; i++ )
+	},
+ 	disableButton: function(buttonId) {
+		document.getElementById(buttonId).disabled = true
+	},
+	enableButton: function(buttonId) {
+		document.getElementById(buttonId).disabled = false
+	},
+	getLastHighlightedDiv: function() {
+		var findClass = document.getElementsByClassName('showDivInRed')
+		return findClass[0]
+	},
+	getNextDivToHighlight: function(lastHighlightedDiv) {
+		var next = lastHighlightedDiv.nextSibling
+		next = next.nextSibling
+		return next
+	},
+	jumpTo: function(targetDivId) {
+		var element = document.createElement('div')
+		element.id = targetDivId
+		return element
+	},
+	getSelectedLoop: function() {
+		var list_of_loop = document.getElementById('loopList')
+		var selected_loop = list_of_loop.options[list_of_loop.selectedIndex].text
+		return selected_loop
+	},
+	displayLoop: function(loopId, firstStatementId) {
+		var node = document.getElementById(loopId)
+		var allChild = node.childNodes
+		for( i = 1 ; i < allChild.length ; i+=2)	
 		{
-			next = next.nextSibling
-		} 
-	return next
-}
-
-function goToForLoopHead(lastHighlightedDiv)
-{
-	var previous = lastHighlightedDiv.previousSibling
-		for( i = 1 ; i <= 5 ; i++ )
-		{
-			previous = previous.previousSibling
+			if( allChild[i].id === firstStatementId)
+			this.changeClass(allChild[i].id, 'showDivInRed')
+			else
+			this.changeClass(allChild[i].id, 'showDiv')	
 		}
-		
-	return previous
-}
-
-function goToWhileLoopHead(lastHighlightedDiv)
-{
-	var previous = lastHighlightedDiv.previousSibling
-	for( i = 1 ; i <= 7 ; i++ )
-	{
-		previous = previous.previousSibling
-	} 
-	
-	return previous
-}
-
-function addClickEvent(id, method)
-{
-	var element = document.getElementById(id)
-	element.addEventListener('click',method,false)
-}
-
-function addEventOnInputBox(id, method)
-{
-	var element = document.getElementById(id)
-	element.addEventListener('change', method, false)
-}
-
-function activateEvents()
-{
-	addClickEvent('btnNext',nextBtn)
-	addClickEvent('btnStart',startBtn)
-	addClickEvent('nestedStartBtn',startBtnNested)
-	addClickEvent('nestedNextBtn',nextBtnNested)
-	addClickEvent('nestedLoop',function() { mySwitchFunction('div1-body','nested');})
-	addClickEvent('localVariables',function() { mySwitchFunction('div1-body','show');})
-	addClickEvent('initialize',function() { mySwitchFunction('show','div1-body');})
-	addClickEvent('simpleLoop',function() { mySwitchFunction('nested','div1-body');})
-	addEventOnInputBox('inputValue',getInput)
-	addEventOnInputBox('nestedInput',getNestedInput)
-}
-
-function getSelectedLoop()
-{
-	var list_of_loop = document.getElementById('loop_list')
-	var selected_loop = list_of_loop.options[list_of_loop.selectedIndex].text
-	return selected_loop
-}
-
-function getInput()
-{
-	var inputValue = document.getElementById("inputValue").value
-	window.inp = Number(inputValue)
-}
-
-function getNestedInput()
-{
-	var inputValue = document.getElementById("nestedInput").value
-	window.nestedInp = Number(inputValue)
-}
-
-function startBtn()
-{
-	document.getElementById('div221').innerHTML+="<br>"
-	var selected_loop = getSelectedLoop()
-	var inputValue = document.getElementById("inputValue").value
-
-	if (selected_loop === "for" && inputValue !== "" && !isNaN(window.inp))
-	{
-	 	var node = document.getElementById("forLoopContent")
+	},
+	hideLoop: function(loopId) {
+		var node = document.getElementById(loopId)
 		var allChild = node.childNodes
-
-	 		for( i = 1 ; i < allChild.length ; i+=2)	
-			{
-				if( allChild[i].id === 'codeContentFor1')
-				changeClass(allChild[i].id,'showDivInRed')
-
-				else
-				changeClass(allChild[i].id,"showDiv")	
-			}
-	}
-	if (selected_loop === "while" && inputValue !== "" && !isNaN(window.inp))
-	{
-	 	var node = document.getElementById("whileLoopContent");
-		var allChild = node.childNodes
-
-	 		for( i = 1 ; i < allChild.length ; i+=2)	
-			{
-				if( allChild[i].id === 'codeContentWhile1')
-				changeClass(allChild[i].id,'showDivInRed')
-
-				else
-				changeClass(allChild[i].id,"showDiv")	
-			}
-	}
-	if (selected_loop === "do-while" && inputValue !== "" && !isNaN(window.inp))
-	{
-	 	var node = document.getElementById("dowhileLoopContent");
-		var allChild = node.childNodes
-
-	 		for( i = 1 ; i < allChild.length ; i+=2)	
-			{
-				if( allChild[i].id === 'codeContentDoWhile1')
-				changeClass(allChild[i].id,'showDivInRed')
-
-				else
-				changeClass(allChild[i].id,"showDiv")	
-			}
-	}
-			disableButton('btnStart')
-	 		enableButton('btnNext')
-}	 
-
-function nextBtn()
-{
-	var selected_loop = getSelectedLoop()
-	var lastRedDiv = getLastHighlightedDiv()
-	var nextRedDiv = getNextDivToHighlight(lastRedDiv)
-	
-	var i = window.inp
-	if( window.inp === 0 )
-	{	
-		if( lastRedDiv.id !== 'codeContentFor6' && lastRedDiv.id !== 'codeContentWhile6' && lastRedDiv.id !== 'codeContentDoWhile7' )
+		for( i = 1 ; i < allChild.length ; i+=2)	
 		{
-			changeClass(lastRedDiv.id,'showDiv')
-			changeClass(nextRedDiv.id,'showDivInRed')
-		}	
-		else
+			this.changeClass(allChild[i].id, 'hide')	
+		}
+	},
+	clearExecutionSection: function() {
+		this.hideLoop('forLoopContent')
+		this.hideLoop('whileLoopContent')
+		this.hideLoop('dowhileLoopContent')
+		this.hideLoop('nestedLoopContent')
+	},
+	printSpace: function() {
+		document.getElementById('resultDisplay').innerHTML += '_'
+	},
+	printStar: function() {
+		document.getElementById('resultDisplay').innerHTML += '*'
+		this.highlightNextStep()
+	},
+	insertNewLine: function() {
+		document.getElementById('resultDisplay').innerHTML += '<br>'
+		this.nextRedDiv = this.jumpTo('codeContentNested20')
+		this.highlightNextStep()
+		this.n++
+		this.i++
+		this.resetVariables()
+		this.copy--
+	},
+	resetVariables: function() {
+		this.j = 1
+		this.m = 1
+		this.k = 0
+	},
+	resultDisplay: function(previousState, currentState, nextState) {
+		document.getElementById('resultDisplay').innerHTML += previousState + ' ' + '*' + ' ' + currentState + '=' + ' ' + nextState + '<br>'
+		document.getElementById('localVariableI').innerHTML = currentState
+		document.getElementById('localVariableFact').innerHTML = nextState
+	},
+	clearDivs: function() {
+		document.getElementById('resultDisplay').innerHTML = ''
+		document.getElementById('nestedlocalVariableI').innerHTML = ''
+    	document.getElementById('nestedlocalVariableJ').innerHTML = ''
+    	document.getElementById('nestedlocalVariableK').innerHTML = ''
+    	document.getElementById('localVariableI').innerHTML = ''
+    	document.getElementById('localVariableFact').innerHTML = ''
+	},
+    startBtn: function() {
+    	this.getInput()
+    	this.clearDivs()
+    	var selected_loop = this.getSelectedLoop()
+		var inputValue = document.getElementById('simpleLoopInput').value
+		if (selected_loop === 'for' && inputValue !== '' && !isNaN(model.inp) )
+		{
+			this.displayLoop('forLoopContent', 'codeContentFor1')
+		}
+		if (selected_loop === 'while' && inputValue !== '' && !isNaN(model.inp))
+		{
+			this.displayLoop('whileLoopContent', 'codeContentWhile1')
+		}
+		if (selected_loop === 'do-while' && inputValue !== '' && !isNaN(model.inp))
+		{
+		 	this.displayLoop('dowhileLoopContent', 'codeContentDoWhile1')
+		}
+		this.disableButton('btnStart')
+		this.enableButton('btnNext')
+	},
+	automatedExecutionForSimpleLoop: function() {
+		this.stampSimple = setInterval(function(){view.nextBtn()},1000)
+	},
+	automatedExecutionForNestedLoop: function() {
+		this.stampNested = setInterval(function(){view.nextBtnNested()},1000)
+	},
+	updateModelAndShowResult: function() {
+		if( model.inp >= 1)
 		{	
-			alert('code running is over')
-			disableButton('btnNext')
-			enableButton('btnStart')
-			changeClass(lastRedDiv.id,'showDiv')
+			this.disp = model.fact
+			model.computeNextFact()
+			this.resultDisplay(this.disp, model.inp, model.fact)
+			model.inp --
 		}
-	}	
-	else
-	{	
-		if( lastRedDiv.id === 'codeContentFor4' || lastRedDiv.id === 'codeContentWhile4' || lastRedDiv.id === 'codeContentDoWhile5')
-		{
-			nextRedDiv = getNextDivToHighlight(nextRedDiv)
-			nextRedDiv = getNextDivToHighlight(nextRedDiv)
-			changeClass(lastRedDiv.id,'showDiv')
-			changeClass(nextRedDiv.id,'showDivInRed')
-		}
-		else
-		{
-			if (lastRedDiv.id === 'forLoopTail')
-			{	
-				for( i = window.inp ; i >= 1 ; i--)
-				{
-					var disp = fact
-					fact = fact*i
-					break
-				}
-				nextRedDiv = goToForLoopHead(lastRedDiv)
-				changeClass(lastRedDiv.id,'showDiv')
-				changeClass(nextRedDiv.id,'showDivInRed')
-				document.getElementById('div221').innerHTML+=disp+" "+"*"+" "+window.inp+"="+" "+fact+"<br>"
-				document.getElementById("localVariablesI").innerHTML= "i="+" "+" "+" "+window.inp
-				document.getElementById("localVariablesFact").innerHTML= "fact="+" "+" "+" "+fact
-				window.inp--
-			}	
-			if (lastRedDiv.id === 'whileLoopTail')
-			{	
-				while( i >= 1 )
-				{
-					var disp = fact
-					fact = fact*i
-					i--
-					break
-				}	
-				nextRedDiv = goToWhileLoopHead(lastRedDiv)
-				changeClass(lastRedDiv.id,'showDiv')
-				changeClass(nextRedDiv.id,'showDivInRed')
-				document.getElementById('div221').innerHTML+=disp+" "+"*"+" "+window.inp+"="+" "+fact+"<br>"
-				document.getElementById("localVariablesI").innerHTML= "i="+" "+" "+" "+window.inp
-				document.getElementById("localVariablesFact").innerHTML= "fact="+" "+" "+" "+fact
-				window.inp--
-			}	
-			if (lastRedDiv.id === 'dowhileLoopTail')
-			{	
-				do 
-				{
-					var disp = fact
-					fact = fact*i
-					i--
-					break
-				}while( i >= 1)
-
-				nextRedDiv = goToWhileLoopHead(lastRedDiv)
-				changeClass(lastRedDiv.id,'showDiv')
-				changeClass(nextRedDiv.id,'showDivInRed')
-				document.getElementById('div221').innerHTML+=disp+" "+"*"+" "+window.inp+"="+" "+fact+"<br>"
-				document.getElementById("localVariablesI").innerHTML= "i="+" "+" "+" "+window.inp
-				document.getElementById("localVariablesFact").innerHTML= "fact="+" "+" "+" "+fact
-				window.inp--
-			}	
-			if( window.inp < 1 )
-			{
-				alert("code running is over")
-				changeClass(nextRedDiv.id,'showDiv')
-				disableButton('btnNext')
-	 			enableButton('btnStart')
-			}	
-				
-			
+	},
+	highlightNextStep: function() {
+		this.changeClass(this.lastRedDiv.id, 'showDiv')
+		this.changeClass(this.nextRedDiv.id, 'showDivInRed')
+	},
+	processSimpleLoopStep: function(loopHeadId) {
+		this.updateModelAndShowResult()					
+		this.nextRedDiv = this.jumpTo(loopHeadId)
+		this.highlightNextStep()
+	},
+	endTheSimpleLoopCode: function() {
+		alert('code running is over')
+		clearInterval(this.stampSimple)
+		this.disableButton('btnNext')
+		this.enableButton('btnStart')
+	},
+	endTheNestedLoopCode: function() {
+		alert('code running is over')
+		clearInterval(this.stampNested)
+		this.nextRedDiv = this.jumpTo('codeContentNested22')
+		this.highlightNextStep()
+		this.i = 1
+		this.n = 0
+		this.disableButton('nestedNextBtn')
+		this.enableButton('nestedStartBtn')
+	},
+	nextBtn: function () {
+		this.lastRedDiv = this.getLastHighlightedDiv()
+		this.nextRedDiv = this.getNextDivToHighlight(this.lastRedDiv)
+		if( model.inp === 0 )
+		{	
+			if( this.lastRedDiv.id !== 'codeContentFor6' && this.lastRedDiv.id !== 'codeContentWhile6' && this.lastRedDiv.id !== 'codeContentDoWhile7' )
+				this.highlightNextStep()		
 			else
 			{	
-				changeClass(lastRedDiv.id,'showDiv')
-				changeClass(nextRedDiv.id,'showDivInRed')
+				this.endTheSimpleLoopCode()			
+				this.changeClass(this.lastRedDiv.id, 'showDiv')
 			}
-		}
-		
-	}
-}
-
-function startBtnNested()
-{
-	var inputValue = document.getElementById("nestedInput").value
-	if ( inputValue !== "" && !isNaN(window.nestedInp))
-	{
-		var node = document.getElementById("nestedLoopContent");
-		var allChild = node.childNodes
-
-	 		for( i = 1 ; i < allChild.length ; i+=2)	
-			{
-				if( allChild[i].id === 'codeContentNested1')
-				changeClass(allChild[i].id,'showDivInRed')
-
-				else
-				changeClass(allChild[i].id,"showDiv")	
-			}
-	}	
-}	
-
-function nextBtnNested()
-{
-	document.getElementById('div221').innerHTML+="<br>"
-	var lastRedDiv = getLastHighlightedDiv()
-	var nextRedDiv = getNextDivToHighlight(lastRedDiv)
-	
-	if ( window.nestedInp === 0 )
-	{
-		if( lastRedDiv.id !== 'codeContentNested4' )
-		{
-			changeClass(lastRedDiv.id,'showDiv')
-			changeClass(nextRedDiv.id,'showDivInRed')
 		}	
 		else
 		{	
-			nextRedDiv = jumpToExitLoop(lastRedDiv)	
-			changeClass(nextRedDiv.id,'showDivInRed')
-			changeClass(lastRedDiv.id,'showDiv')
+			if( this.lastRedDiv.id === 'codeContentFor4' || this.lastRedDiv.id === 'codeContentWhile4' || this.lastRedDiv.id === 'codeContentDoWhile5')
+			{
+				this.nextRedDiv = this.getNextDivToHighlight(this.nextRedDiv)
+				this.nextRedDiv = this.getNextDivToHighlight(this.nextRedDiv)
+				this.highlightNextStep()
+			}
+			else
+			{
+				if ( this.lastRedDiv.id === 'forLoopTail' )
+					this.processSimpleLoopStep('forLoopHead')
+				if ( this.lastRedDiv.id === 'whileLoopTail' )
+					this.processSimpleLoopStep('whileLoopHead')
+				if ( this.lastRedDiv.id === 'dowhileLoopTail' )
+					this.processSimpleLoopStep('dowhileLoopHead')
+				if( model.inp < 1 )
+				{
+					this.endTheSimpleLoopCode()
+		 			this.changeClass(this.nextRedDiv.id, 'showDiv')
+		 			model.init()
+				}	
+				else
+					this.highlightNextStep()
+			}
 		}
-		if( nextRedDiv.id === 'codeContentNested25' )	
-		{	
-			alert("code running is over")
-			changeClass(nextRedDiv.id,'showDiv')
+	},
+	startBtnNested: function() {
+		this.getNestedInput()
+		this.clearDivs()
+		var inputValue = document.getElementById('nestedLoopInput').value
+		if ( inputValue !== '' && !isNaN(model.nestedInp) )
+		{
+			this.displayLoop('nestedLoopContent', 'codeContentNested1')
+			document.getElementById('resultDisplay').innerHTML += '<br>'
+			this.copy = model.nestedInp
+			this.disableButton('nestedStartBtn')
+			this.enableButton('nestedNextBtn')
 		}	
-	} 
-}	
+	},	
+	processNestedLoopStep: function(stepId) {
+		this.nextRedDiv = this.jumpTo(stepId)	
+		this.highlightNextStep()
+	},
+	printSpacesInFirstHalf: function() {
+		this.processNestedLoopStep('codeContentNested6')
+		this.j ++
+		this.printSpace()
+	},
+	printSpacesInSecondHalf: function() {
+		this.processNestedLoopStep('codeContentNested16')	
+		this.m ++
+		this.printSpace()
+	},
+	displayLocalVariableJ: function(val) {
+		document.getElementById('nestedlocalVariableJ').innerHTML = val - 1
+		this.highlightNextStep()
+	},
+	displayLocalVariableK: function() {
+		document.getElementById('nestedlocalVariableK').innerHTML = this.j - 1 
+		this.highlightNextStep()
+		this.k++
+		this.j++
+	},
+	displayLocalVariableI: function() {
+		document.getElementById('nestedlocalVariableI').innerHTML = this.i - 1
+		this.highlightNextStep()
+	},
+	nextBtnNested: function() {
+		this.lastRedDiv = this.getLastHighlightedDiv()
+		this.nextRedDiv = this.getNextDivToHighlight(this.lastRedDiv)
+		if ( model.nestedInp === 0 )
+		{
+			if( this.lastRedDiv.id !== 'codeContentNested4' )
+		 		this.highlightNextStep()
+		 	else
+		 		this.processNestedLoopStep('codeContentNested21')
+		 	if ( this.lastRedDiv.id === 'codeContentNested21' )
+		 		alert('code running is over')
+		}
+		else
+		{	
+			if( this.lastRedDiv.id === 'codeContentNested9' && this.j < this.copy )
+				this.printSpacesInFirstHalf()		
+			else if( this.lastRedDiv.id === 'codeContentNested6' && this.j < this.copy )
+				this.displayLocalVariableJ(this.j)		
+			else if( this.lastRedDiv.id === 'codeContentNested6' && this.j >= this.copy )
+				this.processNestedLoopStep('codeContentNested10')
+			else if( this.lastRedDiv.id === 'codeContentNested10' )
+			{
+				if( this.k < this.n )
+					this.displayLocalVariableK()				
+				else
+					this.processNestedLoopStep('codeContentNested15')
+			}
+			else if( this.lastRedDiv.id === 'codeContentNested12' )
+				this.printStar()
+			else if( this.lastRedDiv.id === 'codeContentNested13' )
+			{
+				this.printSpace()
+				this.highlightNextStep()
+			}	
+			else if( this.lastRedDiv.id === 'codeContentNested14' )
+				this.processNestedLoopStep('codeContentNested10')
+			else if( this.lastRedDiv.id === 'codeContentNested15' )
+				this.printStar()
+			else if( this.lastRedDiv.id === 'codeContentNested19' && this.m < this.copy )
+				this.printSpacesInSecondHalf()
+			else if( this.lastRedDiv.id === 'codeContentNested16' && this.m < this.copy )
+				this.displayLocalVariableJ(this.m)
+			else if( this.lastRedDiv.id === 'codeContentNested16' && this.m >= this.copy )
+				this.insertNewLine()
+			else if( this.lastRedDiv.id === 'codeContentNested4' )
+			{
+				if( this.i <= model.nestedInp )
+					this.displayLocalVariableI()			
+				else
+					this.endTheNestedLoopCode()
+			}
+			else if ( this.lastRedDiv.id === 'codeContentNested21' )
+				this.processNestedLoopStep('codeContentNested4')
+			else
+				this.highlightNextStep()			
+		}
+	},
+	init: function() {
+		this.activateEvents()
+	}
+}
+window.onload = function() { view.init() }
