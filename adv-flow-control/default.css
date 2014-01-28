@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *{padding: 0 ; margin: 0 ;}
 
 body{
@@ -301,3 +302,146 @@ height: 10%;
 height: 35%;
 }
 }
+=======
+body{
+float: left;
+text-align: center;
+background-color:rgb(220,220,220);
+}
+
+.blank_column{
+float: left;
+width: 3%;
+}
+
+#div_header1, #div_header2 {
+width:100%;
+height:40px;
+border-bottom:1px solid #969696;
+margin-bottom: 30px;
+padding-top: 8px;
+font-size: 22px;
+}
+
+.div1-1, .div1-2, .div2-1, .div3-1{
+float: left;
+height:30px;
+padding-top: 5px;
+font-size: 18px;
+}
+
+.div1, .div3{
+float: left;
+width:19%;
+height:550px;
+}
+
+.div1{
+border:1px solid #969696;
+}
+    
+.div1-1{
+cursor:pointer;
+border-bottom:1px solid #969696;
+width:59.7%;
+}
+
+.div1-2{
+cursor:pointer;
+border-bottom:1px solid #969696;
+border-left:1px solid #969696;
+width:39.6%;
+}
+
+.div1-body, .show, .nested{
+width:100%;
+float:center;
+font-size: 16px;
+padding-top: 30px;
+height:500px;
+word-spacing:6px;
+}
+
+.loop_type_list, .input_p_field, .input_pyramid_height, .btn_start, .btn_next,.loop_type_list,.btn_nested{
+text-align:center;
+font-size:18px;
+float:center;
+padding:4px 4px 4px 4px;
+}
+
+.input_p_field, .input_pyramid_height{
+border:1px solid #969696;
+}
+
+.loop_type_list,.btn_nested{
+width:80%;
+}
+
+.btn_nested{
+margin-top: 50px;
+}
+
+.input_p_field, .input_pyramid_height{
+width:73.5%;
+}
+
+.btn_start, .btn_next{
+width:36%;
+}
+
+.div2{
+width:50%;
+float:left;
+height:550px;
+}
+
+.div2-2-1, .div2-2-2 , .div2-3, .div3-2{
+float:left;
+text-align: center;
+font-size: 1em;
+margin-bottom: 20px;
+border:1px solid #969696;
+}
+
+.div2-1, .div3-1{
+width:100%;
+border:1px solid #969696;
+margin-bottom: 20px;
+}
+
+.div2-2-1, .div2-2-2{
+width:98.5%;
+height:300px;
+background-color: #B8CFE5;
+padding: 5px 5px 0px 5px;
+}
+
+.div2-3, .div3-2{
+width:100%;
+background-color:#ffffff;
+}
+
+.div2-3{
+height:170px;
+}
+
+.div3-2{
+height:492px;
+}
+
+#div_body .div3-2 .hide {
+    display: none;
+  }
+
+#div_body .div3-2 .showDiv {
+    display: block;
+    text-align: left;
+    color: black;
+}
+
+#div_body .div3-2 .showDivInRed {
+    display: block;
+    color: red;
+    text-align: left;
+  }
+>>>>>>> 6a468944691ca716b34e66fd01c7caffc93719f4
