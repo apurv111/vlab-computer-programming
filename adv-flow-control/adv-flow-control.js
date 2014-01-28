@@ -287,6 +287,10 @@ window.view = {
 		this.m ++
 		this.printSpace()
 	},
+	displayLocalVariableI: function() {
+		document.getElementById('nestedlocalVariableI').innerHTML = this.i - 1
+		this.highlightNextStep()
+	},
 	displayLocalVariableJ: function(val) {
 		document.getElementById('nestedlocalVariableJ').innerHTML = val - 1
 		this.highlightNextStep()
@@ -296,10 +300,6 @@ window.view = {
 		this.highlightNextStep()
 		this.k++
 		this.j++
-	},
-	displayLocalVariableI: function() {
-		document.getElementById('nestedlocalVariableI').innerHTML = this.i - 1
-		this.highlightNextStep()
 	},
 	nextBtnNested: function() {
 		this.lastRedDiv = this.getLastHighlightedDiv()
