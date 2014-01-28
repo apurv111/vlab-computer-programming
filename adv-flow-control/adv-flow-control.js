@@ -1,6 +1,4 @@
 window.model = {
-	inp: 0,
-<<<<<<< HEAD
     nestedInp: 0,
     fact: 1,
     init: function() {
