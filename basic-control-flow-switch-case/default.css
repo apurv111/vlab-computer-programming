@@ -1,0 +1,455 @@
+* {
+margin: 0; padding: 0;
+}
+
+body {
+	background-color:#fff;
+  font-family: sans-serif;
+}
+.control_flow{
+	  width: 100%;
+  	height: 10%;
+  	float: left;
+  	border: 0px solid #969696;
+  	margin-right: 0%;
+    margin-bottom: 1.5%;
+  	background-color: #efeded;
+  }
+
+.control_flow_text{
+  font-size: 1.1em;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 3%;
+  color: #515050;  
+  float: left;
+  width: 61%; 
+  margin-top: 1.5%;
+}
+
+.control_flow_list{
+    float: right;
+    border: 1.5px solid #c9c9c9;
+    padding: 3px 2px 3px 2px;
+    background: #fff;
+    font-size: 0.9em;
+    width:31%;
+    width: 350px;
+    margin: 1%;
+    margin-top: 2.2%;
+    margin-right: 3.2%;
+
+  }
+
+.switch_experiment{
+	width:98%;
+  	
+  	float:left;
+  	margin-top: 0.4%;
+  	margin-left: 1%;
+  	font-size: 1.375em;
+  	text-align: left;
+  	color: black;
+
+  }
+
+.select_the_day{
+  	width:30%;
+  	height:560px;
+  	float:left;
+  	border: 1.5px solid #c9c9c9;
+  	font-size: 0.9em;
+  	text-align: center;
+  	color: #fff;
+  }
+
+.code{
+  	width:32%;
+  	height:560px;
+  	float:left;
+  	margin-left: 1%; 
+  	border: 1.5px solid #c9c9c9;
+  	font-size: 0.8em;
+  	text-align: center;
+  	color: #fff;
+  }
+
+.code_text_div{
+  font-size: 0.55em;
+  text-align: left;
+  padding-top: 10px;
+  background: #fff;
+  height: 520px;
+  color:#000;
+}
+
+.visual_output_of_code_running{
+	  width:33.3%;
+  	height:auto;
+  	float:left;
+  	margin-left: 1%; 
+  	border: 1.5px solid #c9c9c9;
+  	font-size: 0.8em;
+  	text-align: center;
+  	color: #fff;
+  }
+
+.heading_background_color{
+	background-color: #6ca9d8;
+  border: 0px solid #969696;
+  padding:10px;
+  }
+
+.day{
+	font-size: 0.7em;
+	padding-top: 10px;
+}
+
+.variables{
+	font-size: .8em;
+	padding-top: 16px;
+
+}
+
+.margin{
+	padding-top: 25px;
+}
+
+.switch_case{
+	font-size: .7em;
+	padding-top: 10px;
+}
+
+.text_field{
+		width: 50px;
+    height: 20px;
+    font-size: 1.06em;
+    font-weight: bold;
+}
+
+blank{
+  margin-left: 20px;
+  font-size: .7em;
+  padding-top: 10px;
+}
+
+.Switch_Case_drop_down_list{
+    width: 100%;
+    height: 18px;
+}
+
+.button_alignment{
+  margin-top: 2%;
+  margin-left: 42.5%;
+  margin-right: 42.5%;
+  
+}
+
+/* CODE TEXT */
+
+.main{
+  margin-left: 5%;
+  font-weight: bold;
+}
+.char_str_switch{
+  margin-left: 12.5%;
+  margin-top: 5px;
+}
+
+.case_default_text{
+  margin-left: 21.25%;
+  margin-top: 4px;
+}
+
+.break{
+  margin-left: 34.2%;
+  margin-top: 2px;
+}
+
+/*VISUAL OUTPUT OF CODE RUNNING*/
+.day_logo_div{
+  border: 1.5px solid #c9c9c9;
+  height: 95%;
+  width:25%;
+  float: left;
+}
+
+.pictures_logo_div{
+  border: 1.5px solid #c9c9c9;
+  height: 90.2%;
+  width:63%;
+  float: right;
+  padding: 3%;
+}
+
+.day_logo_images{
+  padding-top: 10px;
+  opacity: 0.40;
+}
+
+.pictures_logo_images{
+  width: 100%;
+  height: auto;
+  opacity: 0.40;
+}
+
+.output_alignment{
+float: left;
+margin-left: 10%;
+margin-bottom: 20%;
+}
+.valueOfDay{
+  width: 10;
+  float: left;
+  margin-left: 39%;
+}
+
+.valueOfDayValue{
+  width: 10;
+  float: left;
+  margin-left: 1%;
+}
+
+.redClass{
+  display: block;
+  color: red;
+  font-weight:bold;
+}
+
+.output{
+  padding-top: 1.8%;
+  font-size: .75em;
+  float: right;
+  font-weight:bold;
+}
+
+.null{
+  float: left;
+}
+
+.str{
+  width: 15%;
+  float: left;
+  padding-left: 40%;
+}
+
+
+
+/*EXEPERIMENT Position_Point css */
+
+.position_point{
+  float: left;
+  margin-left: 1%;
+  width: 98%;
+  font-size: 1.3em;
+  text-align: center;
+   border: 1.5px solid #c9c9c9;
+
+  /*border: 1px solid #969696;*/
+  
+}
+
+.initialize_div{
+  float: left;
+  width: 30%;
+  padding-bottom: 1%;
+  border: 1.5px solid #c9c9c9;
+}
+
+.output_div{
+  float: left;
+  width: 37%;
+  margin-left: 1%;
+  border: 1.5px solid #c9c9c9;
+}
+
+.step_div{
+  float: left;
+  width: 30.5%;
+  margin-left: 1%;
+  border: 1.5px solid #c9c9c9;
+}
+
+
+.border_class{
+   bborder: 1.5px solid #c9c9c9;
+   background-color: #C8B560;
+}
+
+.value_variable{
+  margin-top: 7%;
+  font-size: .7em;
+}
+
+.x_y_align{
+  float: left;
+  margin-left: 10%;
+  padding-bottom: 10%;
+}
+
+.text_field1{
+    width: 50px;
+    height: 20px;
+    font-size: 1.06em;
+    font-weight: bold;
+    
+}
+
+.select_code{
+ border: 1.5px solid #c9c9c9;
+  float: left;
+  width: 99.50%;
+  text-align: center;
+  text-align: center;
+  background-color: #C8B560;
+}
+
+.type_of_examples{
+  float: left;
+  text-align: left;
+  font-size: .8em;
+  margin-top: 5%;
+  padding-left: 5%;
+  width: 94%;
+  
+}
+
+.if_else_list{
+    float: left;
+    border: 1.5px solid #c9c9c9;
+    padding: 2px 2px 2px 2px;
+    background: #DCDCDC;
+    font-size: .7em;
+    width:80%;
+    margin-top: 2%;
+    margin-left: 5%;    
+  }
+
+.button_if_else{
+  float: left;
+  margin-top: 8%;
+  margin-left: 33%;
+  border: 1.5px solid #c9c9c9;
+}
+
+/*.button_next_if{
+  float: right;
+}*/
+
+.local_variable{
+  float: left;
+  text-align: left;
+  font-size: .8em;
+  margin-top: 8%;
+  padding-left: 5%;
+  width: 94%; 
+}
+
+.flag_text{
+  float: left;
+  text-align: left;
+  font-size: .7em;
+  margin-top: 8%;
+  margin-left: 10%;
+  width: 89%;
+}
+
+.flag_text1{
+  float: left;
+  text-align: left;
+  font-size: .7em;
+  margin-top: 8%;
+  width: 17%;
+}
+
+.if_else_text{
+  float: left;
+  text-align: left;
+  font-size: .6em;
+  margin-top: 3%;
+  margin-left: 5%;
+}
+
+
+.if_else_text1{
+  font-weight: bold;
+}
+
+.if_else_text2{
+  width: 100%;
+  margin-left: 12.5%;
+  margin-top: 5px;
+  
+}
+
+.if_else_text3{
+  margin-left: 21.25%;
+  margin-top: 5px; 
+}
+.if_else_text4{
+  margin-top: 59%;
+}
+
+.if_else_text5{
+  margin-top: 2%;
+}
+
+
+
+.output_graph_div{
+  /*width: 100%;*/
+  /*width: 470px;
+  height: 547px;*/
+  border: 1.5px solid #c9c9c9;
+}
+
+canvas{
+  float: left;
+  background: #F0FFF0;
+}
+
+@media screen and (max-width: 450px) {
+.switch_experiment, .control_flow_text{
+  font-size: 0.8em;
+
+
+}
+.control_flow_list{
+  font-size: 1em;
+  width:80%;
+  float:none;
+  clear:all;
+  margin-top: 1%;
+}
+.control_flow_text{
+  width:99%;
+  padding-left: 1%;
+}
+.text_field{
+  font-size:1.8em;
+}
+#drop_down_list_option{
+  width:98%;
+  overflow:hidden;
+  font-size: 1.8em;
+
+}
+.button_alignment{
+max-width:80%;
+margin-top: 10% !important;
+margin:auto;
+
+}
+.code_text_div{
+
+  font-size: 1.2em;
+  overflow:auto;
+  overflow-x:scroll;
+
+}
+.day_logo_div{
+  max-height:50%;
+}
+
+}
+
