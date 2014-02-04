@@ -362,4 +362,8 @@ window.view = {
 		this.activateEvents()
 	}
 }
+<<<<<<< HEAD
 window.onload = function() { view.init() }
+=======
+window.onload = function() { view.init() }
+>>>>>>> cd28a20c837f48a297a87d39998cfd4995a808be
