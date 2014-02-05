@@ -1,0 +1,65 @@
+.container{
+	padding:0;
+	margin:5% 2% 2% 2%;
+}
+.thumbnail{
+	margin-bottom:1%;
+	padding-bottom:1%;
+}
+.row{
+	max-width:29%; 
+	margin:0;
+	float:left;
+	display:inline;
+}
+.col-sm-12{
+	float:left;
+	padding:0;
+}
+.panel-title,
+.panel-body{
+	font-size:1em;
+}
+.main_program{
+	width:30%;
+	float:right;
+}
+.top_section{
+	border: 1px solid #9b9999;
+	margin-top:6px;
+}
+h5{
+	margin:3px 2px;
+}
+.input-group{
+	margin:10px 2px;
+}
+.bottom_section{
+	border: 1px solid #9b9999;
+	margin-top:6px;
+	overflow: auto;
+}
+.btn-group{
+	padding:1px 1px 1px 1px;
+}
+.enter{
+	width:39%;
+	float:left;
+	margin-left: 4px;
+}
+.enter1{
+	border:1px solid #9b9999;
+
+}
+#btnexe{
+	padding:4px 2px 7px 15px;
+}
+#enter2, #enter3, #enter4{
+	margin-top: 5px
+}
+.hide{
+	display: none;
+}
+.show{
+	display: block;
+}
