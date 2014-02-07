@@ -18,8 +18,6 @@ window.view = {
 	k: 0,
 	n: 0,
 	disp: 0,
-	stampSimple: 0,
-	stampNested: 0,
 	lastRedDiv: new Object(),
 	nextRedDiv: new Object(),
 	addClickEvent: function(id, method) {
@@ -45,13 +43,13 @@ window.view = {
 		this.clearExecutionSection()
 	},
 	activateEvents: function() {
-		this.addClickEvent('btnNext', function() { view.automatedExecutionForSimpleLoop() })
+		this.addClickEvent('btnNext', function() { view.nextBtn() })
 		this.addClickEvent('optionFor', function() { view.clearExecutionSection() })
 		this.addClickEvent('optionWhile', function() { view.clearExecutionSection() })
 		this.addClickEvent('optionDoWhile', function() { view.clearExecutionSection() })
 		this.addClickEvent('btnStart', function() { view.startBtn() })
 		this.addClickEvent('nestedStartBtn', function() { view.startBtnNested() })
-		this.addClickEvent('nestedNextBtn', function() { view.automatedExecutionForNestedLoop() })
+		this.addClickEvent('nestedNextBtn', function() { view.nextBtnNested() })
 		this.addClickEvent('btnNestedLoop', function() { view.switchMultipleDivForNestedLoop() })
 		this.addClickEvent('btnSimpleLoop', function() { view.switchMultipleDivForSimpleLoop() })
 		this.addEventOnInputBox('simpleLoopInput', function() { view.getInput() })
@@ -97,9 +95,9 @@ window.view = {
 		return element
 	},
 	getSelectedLoop: function() {
-		var list_of_loop = document.getElementById('loopList')
-		var selected_loop = list_of_loop.options[list_of_loop.selectedIndex].text
-		return selected_loop
+		var listOfLoop = document.getElementById('loopList')
+		var selectedLoop = listOfLoop.options[listOfLoop.selectedIndex].text
+		return selectedLoop
 	},
 	displayLoop: function(loopId, firstStatementId) {
 		var node = document.getElementById(loopId)
@@ -179,12 +177,6 @@ window.view = {
 		}
 		this.disableButton('btnStart')
 		this.enableButton('btnNext')
-	},
-	automatedExecutionForSimpleLoop: function() {
-		this.stampSimple = setInterval(function(){view.nextBtn()},1000)
-	},
-	automatedExecutionForNestedLoop: function() {
-		this.stampNested = setInterval(function(){view.nextBtnNested()},1000)
 	},
 	updateModelAndShowResult: function() {
 		if( model.inp >= 1)
@@ -362,8 +354,4 @@ window.view = {
 		this.activateEvents()
 	}
 }
-<<<<<<< HEAD
 window.onload = function() { view.init() }
-=======
-window.onload = function() { view.init() }
->>>>>>> cd28a20c837f48a297a87d39998cfd4995a808be
