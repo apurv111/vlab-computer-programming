@@ -27,11 +27,12 @@
 			 </br>
             <br></br>
 
-          	<div ><button  class="startButton" type="submit" id = "btnStart" >Start</button></div>
+          	<div ><button  class="startButton" type="submit" id = "btnOk" >OK</button></div>
           	<div class="radioButtonDivision, hide" id = 'inputButtonRadio'>
-            <input type="radio" class="randomRadioButtonText" name="radio_group" >Generate Random Value<br>
-            <input type="radio" class="enterValueRadioButtonText" name="radio_group" >Enter Value<br>
-          <textarea class="arrayInputField" name="firstname" placeholder="Enter values here in comma seperated format or seperated with space" id = 'userInput'></textarea><br>
+            <input type="radio" class="randomRadioButtonText" name="radio_group" id = 'btnRandom'>Generate Random Value<br>
+            <input type="radio" class="enterValueRadioButtonText" name="radio_group" id = 'btnManual'>Enter Value<br>
+          <textarea class="arrayInputField" name="firstname" placeholder="Enter values here in comma seperated format or seperated with space" id = 'userInput' disabled="true"></textarea><br>
+          <button  class='okButton' type="submit" id = "btnStart" >Start</button>
           <button  class="nextButton" type="submit" id = "btnNext" >Next</button>
             </div>
             
@@ -72,14 +73,14 @@
 				<div  id = 'line3'> int A[size]; </div>
 				<div  id = 'line4'> for( i = 1 ; i &lt; size ; i++ ) </div>
 				<div  id = 'line5'> { </div>
-				<div  id = 'line6' class = 'singleIndented'> key = A[i]; </div>
-				<div  id = 'line7' class = 'singleIndented'> j = i - 1 </div>
-				<div  id = 'line8' class = 'singleIndented'> while ( j >= 0 &amp;&amp; A[j] > key  ) </div>
-				<div  id = 'line9' class = 'singleIndented'> { </div>
-				<div  id = 'line10' class = 'doubleIndented'> A[j+1] = A[j];  </div>
-				<div  id = 'line11' class = 'doubleIndented'> j--; </div>
-				<div  id = 'line12' class = 'singleIndented'> } </div>
-				<div  id = 'line13' class = 'singleIndented'> A[j+1] = key; </div>
+				<div  id = 'line6' style = "padding-left:5%;"> key = A[i]; </div>
+				<div  id = 'line7' style = "padding-left:5%;"> j = i - 1; </div>
+				<div  id = 'line8' style = "padding-left:5%;"> while ( j >= 0 &amp;&amp; A[j] > key  ) </div>
+				<div  id = 'line9' style = "padding-left:5%;"> { </div>
+				<div  id = 'line10' style = "padding-left:10%;"> A[j+1] = A[j];  </div>
+				<div  id = 'line11' style = "padding-left:10%;"> j--; </div>
+				<div  id = 'line12' style = "padding-left:5%;"> } </div>
+				<div  id = 'line13' style = "padding-left:5%;"> A[j+1] = key; </div>
 				<div  id = 'line14' > } </div>
 				<div  id = 'line15'> return 0 ; </div>
 				<div  id = 'line16'> } </div>
@@ -120,7 +121,7 @@
 			<div class="sortingDivision" id = 'sortingDiv'></div>
 
 			<div class="currentKeyPositionIndicator">
-				<div class="currentKeyValue">0</div>
+				<div class="currentKeyValue" id = 'key'>0</div>
 				<div class="textKeyValue">Key Value</div>
 			</div>
 
