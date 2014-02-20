@@ -5,6 +5,7 @@ window.view = {
 	i: 1,
 	j: 0,
 	key: 0,
+	m: 0,
 	changeClass: function(id, className) {
 		document.getElementById(id).className = className
 	},
@@ -44,10 +45,8 @@ window.view = {
 	},
 	proceedToStartButton: function() {
 		var userInput = this.getArraySize()
-		if( isNaN( userInput ) === false ) 
-		{
-			if( userInput !== 0 )
-			{
+		if( isNaN( userInput ) === false ) {
+			if( userInput !== 0 ) {
 				var element = document.getElementById('inputButtonRadio')
 				element.className = 'show, radioButtonDivision'
 				this.disableButton('btnNext')
@@ -60,8 +59,7 @@ window.view = {
 	},
 	generateRandomNumbers: function() {
 		var inputValue = this.getArraySize()
-		for ( i = 0 ; i < inputValue ; i++ )
-		{
+		for ( i = 0 ; i < inputValue ; i++ ) {
 			var random = Math.floor(Math.random()*15)
 			this.numbers.push(String(random))
 		}
@@ -113,11 +111,14 @@ window.view = {
 	},
 	validateUserInputs: function() {
 		var result
-		for ( i = 0 ; i < this.numbers.length ; i++ )
-		{
+		for ( i = 0 ; i < this.numbers.length ; i++ ) {
 			if ( isNaN(Number(this.numbers[i])) )
 				return false
 		}
+	},
+	showImage: function() {
+		var pos = this.getPositionOfElement()
+		this.createImage(pos[0], pos[1])
 	},
 	getPositionOfElement: function() {
 		var elements = document.getElementById('sortingDiv').childNodes
@@ -126,10 +127,6 @@ window.view = {
 		var position = []
 		position.push(posLeft, posTop)
 		return position
-	},
-	showSwapping: function() {
-		var position = this.getPositionOfElement()
-		this.createImage(position[0], position[1])
 	},
 	highlightNextStep: function() {
 		this.changeClass(this.lastRedDiv.id, 'show')
@@ -143,12 +140,10 @@ window.view = {
 		this.takeInputFromRadioBox()
 		var arraySize = this.getArraySize()
 		var isValidInput = this.validateUserInputs()
-		if ( arraySize === this.numbers.length )
-		{	
+		if ( arraySize === this.numbers.length ) {	
 			if ( isValidInput === false)
 				alert('Enter Numeric Values Only!')
-			else
-			{
+			else {
 				this.createBoxes()
 				this.showCode()
 				this.convertFromStringToNumber()
@@ -162,98 +157,82 @@ window.view = {
 	},
 	setKey: function() {
 		var key = document.getElementById('key')
-		var elements = document.getElementById('sortingDiv').childNodes
-		var firstElement = elements[this.i-1].firstChild
-		firstElement.className = 'sortedArray'
-		var secondElement = elements[this.i].firstChild
-		secondElement.className = 'keyPosition'
-		key.innerHTML = this.numbers[this.i]
 		key.style.background = '#7fd1a7'
-		this.j = this.i - 1
-		this.key = this.numbers[this.i]
+		var element = document.getElementById('sortingDiv').childNodes
+		key.innerHTML = element[this.i].firstChild.innerHTML
 	},
-	swapElements: function() {
+	swapText: function() {
 		var elements = document.getElementById('sortingDiv').childNodes
-		var firstElement = elements[this.j].firstChild
-		var secondElement = elements[this.j+1].firstChild
-		secondElement.innerHTML = firstElement.innerHTML
+		elements[this.j + 1].firstChild.innerHTML = elements[this.j].firstChild.innerHTML 
+		var temp = this.numbers[this.j]
 	},
 	insertKey: function() {
-		var key = document.getElementById('key').innerHTML
-		var element = document.getElementById('sortingDiv').childNodes
-		element = element[this.j+1].firstChild
-		if ( Number(key) < Number(element.innerHTML) )
-		{
-			element.innerHTML = key
-			// var elements = document.getElementById('sortingDiv').childNodes
-			// var element = elements[this.j].firstChild		
-			// var key = document.getElementById('key')
-			// element.innerHTML = key.innerHTML 
-			// element.style.background = 'red'
-			// key.style.background = 'red'
+		var elements = document.getElementById('sortingDiv').childNodes
+		elements[this.j + 1].firstChild.innerHTML = document.getElementById('key').innerHTML
+	},
+	showElementAsSorted: function() {
+		var elements = document.getElementById('sortingDiv').childNodes
+		elements[this.i - 1].firstChild.style.background = '#fff'
+	},
+	updateArray: function() {
+		var elements = document.getElementById('sortingDiv').childNodes
+		for ( i = 0 ; i < this.numbers.length ; i ++ ) {
+			this.numbers[i] = Number(elements[i].firstChild.innerHTML)
 		}
 	},
 	sortArray: function() {
 		this.lastRedDiv = this.getLastHighlightedDiv()
 		this.nextRedDiv = this.getNextDivToHighlight(this.lastRedDiv)
-		if ( this.lastRedDiv.id === 'line4' )
-		{
-			if ( this.i < this.numbers.length )
+		if ( this.lastRedDiv.id === 'line4' ) {
+			if ( this.i < this.numbers.length ) {
+				this.showElementAsSorted()
 				this.highlightNextStep()
-			else
-			{
+			}
+			else {
 				this.nextRedDiv = this.jumpTo('line15')
 				this.highlightNextStep()
-				alert('code running is over!')
-				this.disableButton('btnNext')
-				this.enableButton('btnStart')
 			}
 		}
-		else if ( this.lastRedDiv.id === 'line6' )
-		{
+		else if ( this.lastRedDiv.id === 'line7' ) {
 			this.setKey()
 			this.highlightNextStep()
+			this.j = this.i - 1
+			this.key = this.numbers[this.i]
 		}
-		else if ( this.lastRedDiv.id === 'line8' )
-		{
-			if ( this.j >= 0 && this.numbers[this.j] > this.numbers[this.i] )
+		else if ( this.lastRedDiv.id === 'line8' ) {
+			if ( this.j >= 0 && this.numbers[this.j] > this.key )
 				this.highlightNextStep()
-			else
-			{
+			else {
 				this.nextRedDiv = this.jumpTo('line13')
 				this.highlightNextStep()
 			}
+		}		
+		else if ( this.lastRedDiv.id === 'line11' ) {
+			this.showImage()
+			this.swapText()
+			this.highlightNextStep()
 		}
-		else if ( this.lastRedDiv.id === 'line10' )
-		{
-			this.showSwapping()
-			this.swapElements()
+		else if ( this.lastRedDiv.id === 'line12' ) {
+			this.removeImage()
+			this.nextRedDiv = this.jumpTo('line8')
 			this.highlightNextStep()
 			this.j --
 		}
-		else if ( this.lastRedDiv.id === 'line11' )
-		{
+		else if ( this.lastRedDiv.id === 'line13' ) {
+			this.insertKey()
 			this.removeImage()
 			this.highlightNextStep()
 		}
-		else if ( this.lastRedDiv.id === 'line12' )
-		{
-			this.nextRedDiv = this.jumpTo('line8')
-			this.highlightNextStep()
-		}
-		else if ( this.lastRedDiv.id === 'line13' )
-		{
-			this.insertKey()
-			this.highlightNextStep()
-		}
-		else if ( this.lastRedDiv.id === 'line14' )
-		{
-			var element = document.getElementById('sortingDiv').childNodes
-			element = element[this.i].firstChild
-			element.className = 'sortedArray'
-			this.i ++
+		else if ( this.lastRedDiv.id === 'line14' ) {
+			this.updateArray()
 			this.nextRedDiv = this.jumpTo('line4')
 			this.highlightNextStep()
+			this.i ++
+		}
+		else if ( this.lastRedDiv.id === 'line15' ) {
+			alert('code running is over!')
+			this.disableButton('btnNext')
+			this.enableButton('btnStart')
 		}
 		else
 			this.highlightNextStep()
