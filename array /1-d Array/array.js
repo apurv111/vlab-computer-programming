@@ -184,8 +184,8 @@ window.view = {
 		this.lastRedDiv = this.getLastHighlightedDiv()
 		this.nextRedDiv = this.getNextDivToHighlight(this.lastRedDiv)
 		if ( this.lastRedDiv.id === 'line4' ) {
+			this.showElementAsSorted()
 			if ( this.i < this.numbers.length ) {
-				this.showElementAsSorted()
 				this.highlightNextStep()
 			}
 			else {
